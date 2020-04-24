@@ -1,0 +1,20 @@
+<table  class="outputTable">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Location</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>sessions Per Week</th>
+    </tr>
+    <ng-container *ngFor="let detail of details;">
+        <tr *ngIf="(detail.scheduledProgramId == targetCourse)">
+            <td>{{detail.scheduledProgramId}}</td>
+            <td>{{detail.programName}}</td>
+            <td>{{detail.location}}</td>
+            <td>{{detail.startDate}}</td>
+            <td>{{detail.endDate}}</td>
+            <td>{{detail.sessionsPerWeek}}</td>
+        </tr>
+    </ng-container>
+</table>

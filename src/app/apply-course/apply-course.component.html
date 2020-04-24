@@ -1,0 +1,58 @@
+<h1 style="text-align: center;">Apply for Course</h1>
+<table  class="outputTable">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Eligibility</th>
+        <th>Duration (Years)</th>
+        <th>Certificate</th>
+    </tr>
+    <ng-container *ngFor="let course of courses;">
+        <tr *ngIf="(course.programId == targetCourse)">
+            <td>{{course.programId}}</td>
+            <td>{{course.programName}}</td>
+            <td>{{course.description}}</td>
+            <td>{{course.applicantEligibility}}</td>
+            <td>{{course.duration}}</td>
+            <td>{{course.degreeCertificateOffered}}</td>
+        </tr>
+    </ng-container>
+</table>
+<br><br>
+<div class="applyForm" >
+    
+    <label>Full Name</label>
+    <input type="text" name="applicantName"  class="inputField" required [formControl]="fullName" ><br>
+    <div *ngIf="fullName.hasError('pattern')">
+        <span [ngStyle]="{'margin-left':'40px','color':'red'}">Name starts with capital letter, only spaces are allowed</span>
+    </div>
+    <label>Date of Birth</label>
+    <input type="date" placeholder="DOB" name="applicantDOB" [(ngModel)]="applicantDOB" class="inputField" required><br>
+    <label>Highest Qualification</label>
+    <select id="highestQualification" id="highestQualification" class="inputField" required [formControl]="qualification">
+        <option value="HSC" >HSC</option>
+        <option value="BTech">BTech</option>
+        <option value="MTech">MTech</option>
+        <option value="Phd">Phd</option>
+      </select><br>
+    <label>Marks (In %)</label>
+    <input type="number" placeholder="Marks (In %)" min="40" step="1" max="100" name="marks"  class="inputField" [formControl]="marksObtained" required><br>
+    <div *ngIf="marksObtained.hasError('min')">
+        <span [ngStyle]="{'margin-left':'40px','color':'red'}">min % is 40</span>
+    </div>
+    <div *ngIf="marksObtained.hasError('max')">
+        <span [ngStyle]="{'margin-left':'40px','color':'red'}">max % is 100</span>
+    </div>
+    <label>Goals</label>
+    <input type="text" placeholder="Goals" name="goals" [(ngModel)]="goals" class="inputField" required><br>
+    <label>Email</label>
+    <input type="email"  name="email"  class="inputField" [formControl]="emailId" required><br>
+    <div *ngIf="emailId.hasError('pattern')">
+        <span [ngStyle]="{'margin-left':'40px','color':'red'}">enter valid emailId</span>
+    </div>
+    <div class="error">{{errorMsg}}</div>
+    <div class="success">{{successMsg}}</div>
+    <br><button class="actionButton" (click)="apply()">Apply</button>
+    
+</div>
